@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BridgeLearn — AI study buddy that works anywhere, even offline</title>
+<meta name="description" content="Paste any lesson text and get a quiz, flashcards and a spaced study plan — generated entirely on your device, no account, no internet needed.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="hero">
+  <h1>Bridge<span>Learn</span></h1>
+  <p>An AI study buddy for students everywhere. Paste any lesson, get a quiz,
+  flashcards and a review plan — generated entirely on your device, with no
+  account and no internet connection needed.</p>
+  <span class="tag">Bridge The Gap Hacks 2026 &middot; Education &amp; Accessibility &middot; 100% offline</span>
+</header>
+
+<main>
+  <!-- Step 1: lesson input -->
+  <section class="card" id="lesson-card">
+    <h2>1. Your lesson</h2>
+    <p class="hint">Paste textbook text, class notes, or an article (5&ndash;30 sentences work best).
+    Nothing leaves your device.</p>
+    <textarea id="lesson" placeholder="Example: Photosynthesis is the process by which green plants make their own food. Chlorophyll is the green pigment in leaves that captures sunlight..."></textarea>
+    <div class="row">
+      <button class="primary" id="btn-generate">Generate quiz &amp; flashcards</button>
+      <button class="ghost" data-sample="photo">Try: Photosynthesis</button>
+      <button class="ghost" data-sample="net">Try: How the Internet Works</button>
+      <button class="ghost" data-sample="civic">Try: Civic Rights 101</button>
+    </div>
+    <div class="stats" id="stats" hidden>
+      <div class="stat"><b id="st-words">0</b><span>words</span></div>
+      <div class="stat"><b id="st-sent">0</b><span>sentences</span></div>
+      <div class="stat"><b id="st-ease">0</b><span>reading ease (0&ndash;100)</span></div>
+      <div class="stat"><b id="st-grade">0</b><span>grade level &middot; <span id="st-label"></span></span></div>
+    </div>
+    <div id="read-meter" hidden>
+      <div class="meter"><i id="read-bar" style="width:0%"></i></div>
+      <p class="hint" id="read-note"></p>
+    </div>
+  </section>
+
+  <!-- Step 2: outputs -->
+  <div class="tabs" role="tablist">
+    <button class="active" data-tab="quiz" role="tab">Quiz</button>
+    <button data-tab="cards" role="tab">Flashcards</button>
+    <button data-tab="plan" role="tab">My review plan</button>
+  </div>
+
+  <section class="card panel active" id="panel-quiz">
+    <h2>2. Quiz</h2>
+    <div id="quiz-empty"><p class="hint">Generate a quiz from your lesson above — questions are built from your own text, so every quiz is different.</p></div>
+    <div id="quiz-box" hidden>
+      <p class="progress" id="quiz-progress"></p>
+      <p class="q" id="quiz-q"></p>
+      <div class="opts" id="quiz-opts"></div>
+      <div id="quiz-free" hidden>
+        <input class="answer" id="quiz-input" placeholder="Type the missing word..." autocomplete="off">
+        <button class="primary" id="quiz-check">Check answer</button>
+      </div>
+      <div id="quiz-feedback"></div>
+      <div class="row"><button class="ghost" id="quiz-next" hidden>Next question &rarr;</button></div>
+      <div id="quiz-done" hidden></div>
+    </div>
+  </section>
+
+  <section class="card panel" id="panel-cards">
+    <h2>Flashcards</h2>
+    <p class="hint">Tap a card to flip it. Mark what you know — the review plan will bring back what you miss, at the right time.</p>
+    <div id="cards-empty"><p class="hint">No flashcards yet — generate them from a lesson first.</p></div>
+    <div id="cards-box" hidden>
+      <div class="flash"><div class="inner" id="card-face"><span id="card-text"></span><small id="card-hint">tap to flip</small></div></div>
+      <div class="row">
+        <button class="ghost" id="card-prev">&larr; Prev</button>
+        <button class="primary" id="card-know">I know this ✓</button>
+        <button class="ghost" id="card-miss">Not yet ✗</button>
+        <button class="ghost" id="card-next">Next &rarr;</button>
+      </div>
+      <p class="progress" id="card-progress"></p>
+    </div>
+  </section>
+
+  <section class="card panel" id="panel-plan">
+    <h2>My review plan</h2>
+    <p class="hint">Spaced repetition (SM-2): correct answers push the next review further out;
+    mistakes bring it back tomorrow. Saved on this device only.</p>
+    <ul class="due" id="plan-list"></ul>
+    <p class="hint" id="plan-empty">Nothing scheduled yet — finish a quiz or flip through flashcards and your plan will appear here.</p>
+    <div class="row"><button class="ghost" id="plan-clear">Clear my plan</button></div>
+  </section>
+
+  <section class="card">
+    <h2>Why offline-first?</h2>
+    <p class="hint">Talent exists everywhere, but fast internet and paid tutors don&rsquo;t.
+    BridgeLearn runs as a single page with no server, no account and no API key,
+    so it works on a shared phone, a school computer, or a village library&rsquo;s
+    one slow connection — the same lesson, the same quiz, for every student.
+    All generation is deterministic and reproducible: the same text always
+    produces the same quiz, so a teacher can print it or share it with a class.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Built for <strong>Bridge The Gap Hacks 2026</strong> (sq-hacks.devpost.com) — theme: Education &amp; Accessibility / Social Good.
+  Built with AI coding assistance (Muse) — the idea, design decisions and testing are the author&rsquo;s own; quiz generation runs fully on-device with no external AI service.
+  Source: public GitHub repository linked on the Devpost submission.</p>
+</footer>
+
+<script src="quiz.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
